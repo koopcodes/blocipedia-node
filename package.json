@@ -1,0 +1,16 @@
+{
+  "name": "blocipedia-node",
+  "version": "1.0.0",
+  "description": "\"A Wikipedia-like application for users to share content\"",
+  "main": "(src/server.js)",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "keywords": [
+    "Wiki",
+    "Bloc",
+    "Koop"
+  ],
+  "author": "koop",
+  "license": "ISC"
+}
