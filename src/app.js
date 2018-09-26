@@ -3,10 +3,6 @@ const app = express();
 const appConfig = require('./config/main-config.js');
 const routeConfig = require('./config/route-config.js');
 
-app.use('/', (req, res, next) => {
-	res.send('Welcome to Koopipedia');
-});
-
 appConfig.init(app, express);
 routeConfig.init(app);
 

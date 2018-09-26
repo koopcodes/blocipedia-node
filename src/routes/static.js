@@ -4,8 +4,6 @@ const staticController = require('../controllers/staticController');
 
 router.get('/', staticController.index);
 router.get('/about', staticController.about);
-router.get('/marco', (req, res, next) => {
-	res.send('polo');
-});
+router.get('/marco', staticController.marco);
 
 module.exports = router;
