@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Koopipedia</a>
+      <a class="navbar-brand" href="/contents">Contents</a>
+      <a class="navbar-brand" href="/topics">Topics</a>
+      <a class="navbar-brand" href="/random">Random</a>
+			<a class="navbar-brand" href="/premium">Premium</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+          	<a class="nav-link" href="/">Home</a>
+          </li>
+					<li class="nav-item">
+      			<a class="nav-link" href="/contents">Contents</a>
+    			</li>
+					<li class="nav-item">
+      			<a class="nav-link" href="/topics">Topics</a>
+    			</li>
+					<li class="nav-item">
+      			<a class="nav-link" href="/random">Random</a>
+    			</li>
+					<li class="nav-item">
+      			<a class="nav-link" href="/premium">Premium</a>
+    			</li>
+					<!-- #1 We use the currentUser variable from the middleware function we defined while setting up Passport. If it returns a truthy value, a user is signed in. Inside, we use a link that will sign out the user -->
+					<% if(currentUser) { %>
+						<li class="nav-item">
+       				<a class="nav-link" href="/users/<%= currentUser.id %>">Profile</a>
+     				</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/users/sign_out">Sign out</a>
+						</li>
+					<% } else { %>
+					<!-- #2 If there is no current user, we show links to sign in or sign up -->
+						<li class="nav-item">
+							<a class="nav-link" href="/users/sign_up">Sign up</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/users/sign_in">Sign in</a>
+						</li>
+					<% }%>
+        </ul>
+      </div>
+    </div>
+  </nav>
