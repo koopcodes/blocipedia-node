@@ -1,7 +1,7 @@
 // #1 We import Passport and the local strategy to use in our implementation. Passport is authentication middleware that provides over 500 strategies to handle authentication through everything from social media accounts to local authentication using username and password. We import our User model and a helper module
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../db/models').User;
+// const User = require('../db/models').User;
 const authHelper = require('../auth/helpers');
 
 module.exports = {
