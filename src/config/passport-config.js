@@ -1,7 +1,7 @@
 // #1 We import Passport and the local strategy to use in our implementation. Passport is authentication middleware that provides over 500 strategies to handle authentication through everything from social media accounts to local authentication using username and password. We import our User model and a helper module
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const User = require('../db/models').User;
+const User = require('../db/models').User;
 const authHelper = require('../auth/helpers');
 
 module.exports = {
@@ -14,15 +14,16 @@ module.exports = {
 		passport.use(
 			new LocalStrategy(
 				{
-					usernameField: 'email',
+					usernameField: 'name',
+					passReqToCallback : true,
 				},
-				(email, password, done) => {
+				(req, name, password, done) => {
 					User.findOne({
-						where: { email },
+						where: { name },
 					}).then(user => {
 						// #4 If we find no user with a provided email, or if the password provided doesn't match the one stored in the database, we return an error message
 						if (!user || !authHelper.comparePass(password, user.password)) {
-							return done(null, false, { message: 'Invalid email or password' });
+							return done(null, false, { message: 'Invalid username or password' });
 						}
 						// #5 If all went well, we return the authenticated user
 						return done(null, user);

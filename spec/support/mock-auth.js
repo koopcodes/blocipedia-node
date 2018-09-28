@@ -2,7 +2,7 @@ module.exports = {
 	// #1 fakeIt takes the Express instance when called and mounts the middleware and the route needed for our fake authorization endpoint.
 	fakeIt(app) {
 		// #2  We allocate variables outside of the middleware function so we can keep them defined after the middleware function has passed control to the next function.
-		let role, id, email;
+		let name, role, id, email;
 
 		// #3 We define the middleware function we will use.
 		function middleware(req, res, next) {
@@ -15,6 +15,7 @@ module.exports = {
 			if (id && id != 0) {
 				req.user = {
 					'id': id,
+					'name': name,
 					'email': email,
 					'role': role,
 				};
