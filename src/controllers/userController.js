@@ -2,40 +2,13 @@ const userQueries = require('../db/queries.users.js');
 const passport = require('passport');
 
 module.exports = {
-	signUp(req, res, next) {
-		res.render('users/sign_up');
-	},
-
-	signInForm(req, res, next) {
-		res.render('users/sign_in');
-	},
-
-	signOut(req, res, next) {
-		req.logout();
-		req.flash('notice', 'You\'ve successfully signed out!');
-		res.redirect('/');
-	},
-
-	signIn(req, res, next) {
-		passport.authenticate('local', function(err, user, info) {
-			if (err) {
-				return next(err);
-			}
-
-			if (!user) {
-				req.flash('notice', `Sign in failed. ${info.message}`);
-				res.redirect('/users/sign_in');
-			}
-
-			req.logIn(user, function(err) {
-				if (err) {
-					return next(err);
-				}
-
-				req.flash('notice', 'You\'ve successfully signed in!');
-				res.redirect('/');
-			});
-		})(req, res, next);
+	authenticate(req, res, next) {
+		if (!req.user) {
+			req.flash('notice', 'Please sign in.');
+			return res.redirect('/users/sign_in');
+		} else {
+			next();
+		}
 	},
 
 	create(req, res, next) {
@@ -54,11 +27,47 @@ module.exports = {
 			} else {
 				// #3 If we created the user successfully, we authenticate the user by calling the  authenticate method on the Passport object. We specify the strategy to use (local) and pass a function to call for an authenticated user. This function sets a message and redirects to the landing page. authenticate uses the function in  passport-config.js where we defined the local strategy
 				passport.authenticate('local')(req, res, () => {
-					req.flash('notice', 'You\'ve successfully signed up! An email confirmation has been sent to you.');
+					req.flash('notice', "You've successfully signed up! An email confirmation has been sent to you.");
 					res.redirect('/');
 				});
 			}
 		});
+	},
+
+	signIn(req, res, next) {
+		passport.authenticate('local', function(err, user, info) {
+			if (err) {
+				return next(err);
+			}
+
+			if (!user) {
+				req.flash('notice', `Sign in failed. ${info.message}`);
+				res.redirect('/users/sign_in');
+			}
+
+			req.logIn(user, function(err) {
+				if (err) {
+					return next(err);
+				}
+
+				req.flash('notice', "You've successfully signed in!");
+				res.redirect('/');
+			});
+		})(req, res, next);
+	},
+
+	signInForm(req, res, next) {
+		res.render('users/sign_in');
+	},
+
+	signUp(req, res, next) {
+		res.render('users/sign_up');
+	},
+
+	signOut(req, res, next) {
+		req.logout();
+		req.flash('notice', "You've successfully signed out!");
+		res.redirect('/');
 	},
 
 	show(req, res, next) {
