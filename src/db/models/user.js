@@ -36,16 +36,16 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	User.associate = function(models) {
 		// associations can be defined here
+		User.hasMany(models.Wiki, {
+			foreignKey: 'userId',
+			as: 'wikis',
+		});
 	};
 
 	// We define an isAdmin method in the interface of the User model. The method will return true if the user has a role of admin. This allows us to write less code every time we need to check if a user is an admin.
 	User.prototype.isAdmin = function() {
 		return this.role === 'admin';
 	};
-
-	User.prototype.isMember = function() {
-			return this.role === 'member';
-		};
 
 	User.prototype.isStandard = function() {
 		return this.role === 'standard';
