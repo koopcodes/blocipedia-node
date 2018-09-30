@@ -5,30 +5,30 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			name: {
 				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					// exists: { msg: 'must be unique' },
-					isLength: { msg: 'must be at least 6 characters' },
-				},
+				// allowNull: false,
+				// validate: {
+				// 	// exists: { msg: 'must be unique' },
+				// 	isLength: { msg: 'must be at least 6 characters' },
+				// },
 			},
 
 			email: {
 				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					isEmail: { msg: 'must be a valid email' },
-				},
+				// allowNull: false,
+				// validate: {
+				// 	isEmail: { msg: 'must be a valid email' },
+				// },
 			},
 			password: {
 				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					isLength: { msg: 'must be at least 6 characters in length' },
-				},
+				// allowNull: false,
+				// validate: {
+				// 	isLength: { msg: 'must be at least 6 characters in length' },
+				// },
 			},
 			role: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				// allowNull: false,
 				defaultValue: 'standard',
 			},
 		},

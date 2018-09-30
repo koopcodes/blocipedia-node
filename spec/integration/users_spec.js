@@ -58,7 +58,7 @@ describe('routes : users', () => {
 			it('should not create a user with invalid email', done => {
 				User.create({
 					name: 'PrimeUser',
-					email: "D'oh!",
+					email: 'D\'oh!',
 					password: '1234567890',
 				})
 					.then(user => {

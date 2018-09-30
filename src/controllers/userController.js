@@ -27,7 +27,7 @@ module.exports = {
 			} else {
 				// #3 If we created the user successfully, we authenticate the user by calling the  authenticate method on the Passport object. We specify the strategy to use (local) and pass a function to call for an authenticated user. This function sets a message and redirects to the landing page. authenticate uses the function in  passport-config.js where we defined the local strategy
 				passport.authenticate('local')(req, res, () => {
-					req.flash('notice', "You've successfully signed up! An email confirmation has been sent to you.");
+					req.flash('notice', 'You\'ve successfully signed up! An email confirmation has been sent to you.');
 					res.redirect('/');
 				});
 			}
@@ -50,7 +50,7 @@ module.exports = {
 					return next(err);
 				}
 
-				req.flash('notice', "You've successfully signed in!");
+				req.flash('notice', 'You\'ve successfully signed in!');
 				res.redirect('/');
 			});
 		})(req, res, next);
@@ -66,7 +66,7 @@ module.exports = {
 
 	signOut(req, res, next) {
 		req.logout();
-		req.flash('notice', "You've successfully signed out!");
+		req.flash('notice', 'You\'ve successfully signed out!');
 		res.redirect('/');
 	},
 
