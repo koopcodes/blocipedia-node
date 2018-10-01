@@ -109,4 +109,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+#sendgrid
 sendgrid.env

@@ -1,1 +1,18 @@
-src/views/users/show.ejs
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+      <h1><%= `${user.name}'s profile` %></h1>
+			<h2><%= `Email: ${user.email}` %></h2>
+			<h2><%= `User Role: ${user.role}` %></h2>
+			<h3><%= `Profile created at ${user.createdAt}`%></h3>
+      <hr>
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

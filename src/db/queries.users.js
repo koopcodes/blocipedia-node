@@ -26,9 +26,9 @@ module.exports = {
 					from: 'donotreply@koopipedia.com',
 					subject: 'Welcome to Koopipedia',
 					text:
-						'Thank you for joining Koopipedia. To start contributing to the Wiki community please visit the site and login with the user information you provided. Looking forward to collaborating with you! - Koop from the Koopipedia Team',
+						'Welcome! Thank you for joining Koopipedia. To start contributing to the Wiki community please visit the site and login with the user information you provided. Looking forward to collaborating with you! - Koop from the Koopipedia Team',
 					html:
-						'Thank you for joining Koopipedia. To start contributing to the Wiki community please visit the site and login with the user information you provided. Looking forward to collaborating with you! <br><br>- Koop from the Koopipedia Team',
+						'Welcome! Thank you for joining Koopipedia. To start contributing to the Wiki community please visit the site and login with the user information you provided. Looking forward to collaborating with you! <br><br>- Koop from the Koopipedia Team',
 				};
 
 				sgMail.send(msg);
@@ -36,22 +36,23 @@ module.exports = {
 				callback(null, user);
 			})
 			.catch(err => {
+				console.log('createUser query error: ' + err);
 				callback(err);
 			});
 	},
 
 	getUser(id, callback) {
 		// Define a result object to hold the user that we will return and request the User object from the database
+		console.log('getUser id passed: ' + id);
 		let result = {};
-		User.findById(id).then(user => {
-			// If no user returns return an error
-			if (!user) {
-				callback(404);
-			} else {
-				// Otherwise, store the resulting user
+		return User.findById(id)
+			.then(user => {
 				result['user'] = user;
-			}
-		});
+				callback(null, result);
+			})
+			.catch(err => {
+				callback(err);
+			});
 	},
 	// END Get User
 };
