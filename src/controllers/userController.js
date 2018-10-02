@@ -110,7 +110,7 @@ module.exports = {
 			})
 			.then(charge => {
 				userQueries.upgrade(req.user.dataValues.id);
-				res.render('users/show');
+				res.redirect('/');
 			});
 	},
 
