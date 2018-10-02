@@ -1,5 +1,9 @@
 const userQueries = require('../db/queries.users.js');
+const wikiQueries = require('../db/queries.wikis.js');
 const passport = require('passport');
+const secretKey = process.env.stripeSecretTestKey;
+const publicKey = 'pk_test_dTwq1s9L2aRKonJ1idkQTLtF';
+var stripe = require('stripe')(secretKey);
 
 module.exports = {
 	authenticate(req, res, next) {
@@ -83,5 +87,37 @@ module.exports = {
 				res.render('users/show', { result });
 			}
 		});
+	},
+
+	//change this to live secret key in production: https://dashboard.stripe.com/account/apikeys
+	upgrade(req, res, next) {
+		res.render('users/upgrade', { publicKey });
+	},
+
+	payment(req, res, next) {
+		stripe.customers
+			.create({
+				email: req.body.stripeEmail,
+				source: req.body.stripeToken,
+			})
+			.then(customer => {
+				stripe.charges.create({
+					amount: 1500,
+					description: 'Koopipedia Premium Membership Fee',
+					currency: 'USD',
+					customer: customer.id,
+				});
+			})
+			.then(charge => {
+				userQueries.upgrade(req.user.dataValues.id);
+				res.render('users/show');
+			});
+	},
+
+	downgrade(req, res, next) {
+		userQueries.downgrade(req.user.dataValues.id);
+		wikiQueries.privateToPublic(req.user.dataValues.id);
+		req.flash('notice', 'You are no longer a premium user and your private wikis are now public.');
+		res.redirect('/');
 	},
 };

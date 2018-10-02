@@ -44,7 +44,8 @@
 		"pg": "^7.4.1",
 		"pg-hstore": "^2.3.2",
 		"sequelize": "^4.32.6",
-		"sequelize-cli": "^4.1.0"
+		"sequelize-cli": "^4.1.0",
+		"stripe": "^6.12.1"
 	},
 	"engines": {
 		"node": "9.11.1",

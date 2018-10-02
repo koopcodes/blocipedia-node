@@ -43,7 +43,6 @@ module.exports = {
 
 	getUser(id, callback) {
 		// Define a result object to hold the user that we will return and request the User object from the database
-		console.log('getUser id passed: ' + id);
 		let result = {};
 		return User.findById(id)
 			.then(user => {
@@ -55,4 +54,32 @@ module.exports = {
 			});
 	},
 	// END Get User
+
+	upgrade(id, callback) {
+		return User.findById(id)
+			.then(user => {
+				if (!user) {
+					return callback('User does not exist!');
+				} else {
+					return user.updateAttributes({ role: 'premium' });
+				}
+			})
+			.catch(err => {
+				callback(err);
+			});
+	},
+
+	downgrade(id, callback) {
+		return User.findById(id)
+			.then(user => {
+				if (!user) {
+					return callback('User does not exist!');
+				} else {
+					return user.updateAttributes({ role: 'standard' });
+				}
+			})
+			.catch(err => {
+				callback(err);
+			});
+	},
 };
