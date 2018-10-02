@@ -1,8 +1,8 @@
 const userQueries = require('../db/queries.users.js');
 const wikiQueries = require('../db/queries.wikis.js');
 const passport = require('passport');
-const secretKey = process.env.stripeSecretTestKey;
-const publicKey = 'pk_test_dTwq1s9L2aRKonJ1idkQTLtF';
+const secretKey = process.env.stripeSecretTestKey; //change this to live secret key in production
+const publicKey = 'pk_test_dTwq1s9L2aRKonJ1idkQTLtF'; //change this to live public key in production
 var stripe = require('stripe')(secretKey);
 
 module.exports = {
@@ -89,8 +89,7 @@ module.exports = {
 		});
 	},
 
-	//change this to live secret key in production: https://dashboard.stripe.com/account/apikeys
-	upgrade(req, res, next) {
+		upgrade(req, res, next) {
 		res.render('users/upgrade', { publicKey });
 	},
 
