@@ -29,12 +29,18 @@ module.exports = {
 
 	destroy(req, res, next) {
 		wikiQueries.deleteWiki(req, (err, wiki) => {
+					const privacyFlag = wiki.private;
+		console.log('privacyFlag: '+ privacyFlag);
 			if (err) {
-				console.log('wikiController destroy error: ' + err);
+				console.log('destroy wiki value2: ', wiki);
+				console.log('wikiController destroy error: ', err);
 				res.redirect(500, `/wikis/${wiki.id}`);
 			} else {
+				if (privacyFlag) {
 				console.log('wikiController destroy called!');
-				res.redirect(303, '/wikis');
+				res.redirect(303, '/wikis/private');
+				} else {console.log('wikiController destroy called!');
+				res.redirect(303, '/wikis');}
 			}
 		});
 	},

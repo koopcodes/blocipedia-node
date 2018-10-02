@@ -75,7 +75,6 @@ module.exports = {
 		userQueries.getUser(req.user.id, (err, result) => {
 			// getUser will send back an object. If the user property of result is not defined that means no user with the passed ID was found.
 			user = result['user'];
-			console.log('show result.user: ', result);
 			if (err || result === undefined) {
 				req.flash('notice', 'No user found with that ID.');
 				res.redirect(404, '/');

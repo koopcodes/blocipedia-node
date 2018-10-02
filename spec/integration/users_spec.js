@@ -186,59 +186,25 @@ describe('routes : users', () => {
 		// 	beforeEach(done => {
 		// 		// Define the variables
 		// 		this.user;
-		// 		this.post;
-		// 		this.comment;
-
 		// 		User.create({
 		// 			name: 'Starman',
 		// 			email: 'starman@tesla.com',
 		// 			password: 'Trekkie4lyfe',
 		// 		}).then(res => {
 		// 			this.user = res;
-
-		// 			Topic.create(
-		// 				{
-		// 					title: 'Winter Games',
-		// 					description: 'Post your Winter Games stories.',
-		// 					posts: [
-		// 						{
-		// 							title: 'Snowball Fighting',
-		// 							body: 'So much snow!',
-		// 							userId: this.user.id,
-		// 						},
-		// 					],
-		// 				},
-		// 				{
-		// 					include: {
-		// 						model: Post,
-		// 						as: 'posts',
-		// 					},
-		// 				},
-		// 			).then(res => {
-		// 				this.post = res.posts[0];
-
-		// 				Comment.create({
-		// 					body: 'This comment is alright.',
-		// 					postId: this.post.id,
-		// 					userId: this.user.id,
-		// 				}).then(res => {
-		// 					this.comment = res;
-		// 					done();
-		// 				});
+		// 			done();
 		// 			});
 		// 		});
 		// 	});
 
 		// 	// Write a spec that makes the request to the profile page
-		// 	it('should present a list of comments and posts a user has created', done => {
+		// 	it('should show the user\'s profile page', done => {
 		// 		request.get(`${base}${this.user.id}`, (err, res, body) => {
-		// 			// The spec sets the expectations that there will be a list with the comment and post we just created
-		// 			expect(body).toContain('Snowball Fighting');
-		// 			expect(body).toContain('This comment is alright.');
+		// 			expect(body).toContain('Profile created at ');
 		// 			done();
 		// 		});
 		// 	});
-		// });
+
 
 		// // END User Scope Test Context
 	});
