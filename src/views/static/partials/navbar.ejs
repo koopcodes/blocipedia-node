@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
 			<a class="navbar-brand" href="/">Koopipedia</a>
+      <a class="navbar-brand" href="/wikis">Public Wikis</a>
 			<!--
-      <a class="navbar-brand" href="/contents">Contents</a>
       <a class="navbar-brand" href="/topics">Topics</a>
       <a class="navbar-brand" href="/random">Random</a>
 			<a class="navbar-brand" href="/premium">Premium</a>
@@ -21,28 +21,27 @@
 					<li class="nav-item">
             <a class="nav-link" href="/wikis">Public Wikis</a>
           </li>
+					<!-- Use the currentUser variable from the middleware function we defined while setting up Passport. If it returns a truthy value, a user is signed in. Inside, we use a link that will sign out the user -->
 					<% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
-              <li class ="nav-item">
-               <a class="nav-link" href="/wikis/private">Private Wikis</a>
-             </li>
+              <li class="nav-item">
+              <a class="nav-link" href="/wikis/private">Private Wikis</a>
+            </li>
 					<% } %>
-					<!-- #1 We use the currentUser variable from the middleware function we defined while setting up Passport. If it returns a truthy value, a user is signed in. Inside, we use a link that will sign out the user -->
 					<% if(currentUser) { %>
 						<li class="nav-item">
        				<a class="nav-link" href="/users/<%= currentUser.id %>">Profile</a>
      				</li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/sign_out">Sign Out</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/sign_up">Sign Up</a>
+            </li>
 						<li class="nav-item">
-							<a class="nav-link" href="/users/sign_out">Sign out</a>
-						</li>
-					<% } else { %>
-					<!-- #2 If there is no current user, we show links to sign in or sign up -->
-						<li class="nav-item">
-							<a class="nav-link" href="/users/sign_up">Sign up</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/users/sign_in">Sign in</a>
-						</li>
-					<% }%>
+              <a class="nav-link" href="/users/sign_in">Sign In</a>
+            </li>
+          <% } %>
         </ul>
       </div>
     </div>

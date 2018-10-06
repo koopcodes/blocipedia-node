@@ -102,7 +102,7 @@ module.exports = {
 					wiki.body = markdown.toHTML(wiki.body);
 					res.render('wikis/show', { wiki });
 				} else {
-					req.flash('notice', 'You are not authorized to do that.');
+					req.flash('notice', 'You are not authorized to do that');
 					res.redirect('/wikis');
 				}
 			}

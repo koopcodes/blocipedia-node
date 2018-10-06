@@ -79,17 +79,18 @@ module.exports = {
 		userQueries.getUser(req.user.id, (err, result) => {
 			// getUser will send back an object. If the user property of result is not defined that means no user with the passed ID was found.
 			user = result['user'];
+			collaborations = result['collaborations'];
 			if (err || result === undefined) {
 				req.flash('notice', 'No user found with that ID.');
 				res.redirect(404, '/');
 			} else {
 				// If the request was successfully handled, we render the view and pass in the unpacked object
-				res.render('users/show', { result });
+				res.render('users/show', { user, collaborations });
 			}
 		});
 	},
 
-		upgrade(req, res, next) {
+	upgrade(req, res, next) {
 		res.render('users/upgrade', { publicKey });
 	},
 
@@ -118,5 +119,17 @@ module.exports = {
 		wikiQueries.privateToPublic(req.user.dataValues.id);
 		req.flash('notice', 'You are no longer a premium user and your private wikis are now public.');
 		res.redirect('/');
+	},
+
+	showCollaborations(req, res, next) {
+		userQueries.getUser(req.user.id, (err, result) => {
+			user = result['user'];
+			collaborations = result['collaborations'];
+			if (err || user == null) {
+				res.redirect(404, '/');
+			} else {
+				res.render('users/collaborations', { user, collaborations });
+			}
+		});
 	},
 };
