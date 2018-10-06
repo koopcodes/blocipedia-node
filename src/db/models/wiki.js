@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				// allowNull: false,
 			},
-		}, {}, );
+		},
+		{},
+	);
 
 	Wiki.associate = function(models) {
 		// associations can be defined here
@@ -29,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
 			onDelete: 'CASCADE',
 		});
 
+		Wiki.hasMany(models.Collaborator, {
+			foreignKey: 'wikiId',
+			as: 'collaborators',
+		});
 	};
 	return Wiki;
 };

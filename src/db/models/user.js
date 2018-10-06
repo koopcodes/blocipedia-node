@@ -5,30 +5,20 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			name: {
 				type: DataTypes.STRING,
-				// allowNull: false,
-				// validate: {
-				// 	// exists: { msg: 'must be unique' },
-				// 	isLength: { msg: 'must be at least 6 characters' },
-				// },
+				allowNull: false,
 			},
 
 			email: {
 				type: DataTypes.STRING,
-				// allowNull: false,
-				// validate: {
-				// 	isEmail: { msg: 'must be a valid email' },
-				// },
+				allowNull: false,
 			},
 			password: {
 				type: DataTypes.STRING,
-				// allowNull: false,
-				// validate: {
-				// 	isLength: { msg: 'must be at least 6 characters in length' },
-				// },
+				allowNull: false,
 			},
 			role: {
 				type: DataTypes.STRING,
-				// allowNull: false,
+				allowNull: false,
 				defaultValue: 'standard',
 			},
 		},
@@ -39,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
 		User.hasMany(models.Wiki, {
 			foreignKey: 'userId',
 			as: 'wikis',
+		});
+
+		User.hasMany(models.Collaborator, {
+			foreignKey: 'userId',
+			as: 'collaborators',
 		});
 	};
 
