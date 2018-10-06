@@ -11,9 +11,23 @@
       <% include ../static/partials/messages.ejs %>
 
   	<% if(wiki.private == true)  { %>
-    <h2> Collaborators</h2>
+    <h1>Edit Collaborators</h1>
+		<hr>
+		<% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
+			<h6>Add Collaborators by Username</h6>
+    	<form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
+      	<div class="input-group">
+          <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+				<% } else { %>
+					<h3>You don't need to add Collaborators to a Puclic Wiki, silly! Everone who is signed in can collaborate on Puclic Wikis</h3>
+				<% } %>
+		<% } %>
+		<p></p>
     <% if(collaborators) { %>
-      <p>
+			<h6>Current Collaborators</h6>
       <ul class ="list-group">
         <% collaborators.forEach((collaborator) => {  %>
           <li class="list-group-item">
@@ -27,20 +41,8 @@
           </li>
         <% }) %>
       </ul>
-    	</p>
     <% } %>
 
-    <% if(currentUser && (currentUser.role === "premium" || currentUser.role === "admin")) { %>
-    	<form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
-      	<div class="input-group">
-          <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
-          <button type="submit" class="btn btn-primary">Add</button>
-        </div>
-      </form>
-      <% } %>
-    <% } else { %>
-			<h3>You don't need to add Collaborators to a Puclic Wiki, silly! Everone who is signed in can collaborate on Puclic Wikis</h3>
-			<% } %>
   	</main>
 	</body>
 </html>
