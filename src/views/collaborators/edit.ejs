@@ -11,7 +11,7 @@
       <% include ../static/partials/messages.ejs %>
 
   	<% if(wiki.private == true)  { %>
-    <h2> Collaborators </h2>
+    <h2> Collaborators</h2>
     <% if(collaborators) { %>
       <p>
       <ul class ="list-group">
@@ -38,7 +38,9 @@
         </div>
       </form>
       <% } %>
-    <% } %>
+    <% } else { %>
+			<h3>You don't need to add Collaborators to a Puclic Wiki, silly! Everone who is signed in can collaborate on Puclic Wikis</h3>
+			<% } %>
   	</main>
 	</body>
 </html>

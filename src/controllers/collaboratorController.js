@@ -11,7 +11,7 @@ module.exports = {
 				console.log('collaboratorController.add error: ', err);
 				req.flash('error', err);
 			}
-			res.redirect(`/wikis/${req.params.wikiId}/collaborators`);
+			res.redirect(req.headers.referer);
 		});
 	},
 
