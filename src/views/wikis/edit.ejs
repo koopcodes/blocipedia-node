@@ -16,21 +16,21 @@
         <div class="form-group">
           <label for="title">Wiki Title</label>
           <input value="<%= wiki.title %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
-          <small class="text-muted" id="titleHelp">title must be 5 or more characters in length.</small>
+          <small class="text-muted" id="titleHelp">Title must be at least 5 characters</small>
         </div>
         <div class="form-group">
           <label for="body">Body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Wiki Body" ><%= wiki.body %></textarea>
-          <small class="text-muted" id="titleHelp">body must be 10 or more characters in length.</small>
+          <small class="text-muted" id="titleHelp">Body must be at least 10 characters</small>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
-<!--
+
         <% if (currentUser && (currentUser.role === 'admin' || (currentUser.role === 'premium' && currentUser.id === wiki.userId))){%>
           <form action="/wikis/<%= wiki.id %>/collaborators" method="post">
           <a href='/wikis/<%= wiki.id %>/collaborators' class="btn btn-info">Edit Collaborators</a>
           </form>
        <% }%>
--->
+
 			</form>
     </main>
     <% include ../static/partials/baseScripts.ejs %>

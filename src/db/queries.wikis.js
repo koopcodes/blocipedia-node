@@ -82,7 +82,7 @@ module.exports = {
 			const authorized = new Authorizer(req.user, wiki).update();
 
 			if (authorized) {
-				console.log('wikiQueries.updateWiki authorized passed');
+				// console.log('wikiQueries.updateWiki authorized passed');
 				wiki
 					.update(updatedWiki, {
 						fields: Object.keys(updatedWiki),
