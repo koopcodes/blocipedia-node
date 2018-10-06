@@ -12,11 +12,19 @@
     <ul>
 <!-- In this case, the key error is an array of validation error objects. We loop over the array displaying the param that caused the error as well as the associated message (msg) from the validation method -->
         <% messages.error.forEach((err) => { %>
+				<!---
+				<% console.log('messages.error.forEach messages.error: ', messages.error); %>
+				<% console.log('messages.error.forEach err: ', err); %>
+				<% console.log('messages.error.forEach err.errors: ', err.errors); %>
+				<% console.log('messages.error.forEach err.param: ', err.param); %>
+				<% console.log('messages.error.forEach err.msg: ', err.msg); %>
           <% if (err.errors) { %>
             <li><%= err.errors[0].message %></li>
           <% } else { %>
             <li><%= `${err.param} ${err.msg}` %></li>
           <% } %>
+				--->
+				<li><%= `${err}` %></li>
         <% }) %>
       </ul>
     <% } else { %>
