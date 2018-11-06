@@ -35,9 +35,17 @@ module.exports = class ApplicationPolicy {
 
 	edit() {
 		if (this.record.private == false) {
-			return this.new() && this.record && (this._isStandard() || this._isPremium() || this._isAdmin());
+			return (
+				this.new() &&
+				this.record &&
+				(this._isStandard() || this._isPremium() || this._isAdmin())
+			);
 		} else if (this.record.private == true) {
-			return this.new() && this.record && (this._isPremium() || this._isAdmin() || this._isStandard());
+			return (
+				this.new() &&
+				this.record &&
+				(this._isPremium() || this._isAdmin() || this._isStandard())
+			);
 		}
 	}
 

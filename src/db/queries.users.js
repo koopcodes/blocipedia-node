@@ -20,7 +20,7 @@ module.exports = {
 			email: newUser.email,
 			password: hashedPassword,
 		})
-			.then(user => {
+			.then((user) => {
 				const msg = {
 					to: newUser.email,
 					from: 'donotreply@koopipedia.com',
@@ -35,7 +35,7 @@ module.exports = {
 
 				callback(null, user);
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.log('createUser query error: ' + err);
 				callback(err);
 			});
@@ -44,18 +44,18 @@ module.exports = {
 	getUser(id, callback) {
 		// Define a result object to hold the user and their collaborations that we will return and request the User object from the database
 		let result = {};
-		User.findById(id).then(user => {
+		User.findById(id).then((user) => {
 			if (!user) {
 				callback(404);
 			} else {
 				result['user'] = user;
 				Collaborator.scope({ method: ['collaborationsFor', id] })
 					.all()
-					.then(collaborations => {
+					.then((collaborations) => {
 						result['collaborations'] = collaborations;
 						callback(null, result);
 					})
-					.catch(err => {
+					.catch((err) => {
 						callback(err);
 					});
 			}
@@ -64,28 +64,28 @@ module.exports = {
 
 	upgrade(id, callback) {
 		return User.findById(id)
-			.then(user => {
+			.then((user) => {
 				if (!user) {
 					return callback('User does not exist!');
 				} else {
 					return user.updateAttributes({ role: 'premium' });
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				callback(err);
 			});
 	},
 
 	downgrade(id, callback) {
 		return User.findById(id)
-			.then(user => {
+			.then((user) => {
 				if (!user) {
 					return callback('User does not exist!');
 				} else {
 					return user.updateAttributes({ role: 'standard' });
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				callback(err);
 			});
 	},
